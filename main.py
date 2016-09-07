@@ -10,10 +10,10 @@ def main():
     #make cmd flags
     typeflags = ["-i", "-s", "-si"]
     sortflags = ["-a", "-d"]
-    openfile = sys.argv[1]
-    writefile = sys.argv[2]
-    typeflag = sys.argv[3]
-    sortflag = sys.argv[4]
+    openfile = sys.argv[1].lower()
+    writefile = sys.argv[2].lower()
+    typeflag = sys.argv[3].lower()
+    sortflag = sys.argv[4].lower()
     
     #open file and create for write
     fr = open("{0}.txt".format(openfile),"r")
@@ -32,7 +32,7 @@ def main():
         
     #logic
     if typeflag in typeflags and sortflag in sortflags:
-        print("True")
+        
         if typeflag == "-i":
             buf = insertSort(buf)
         if typeflag == "-s":
@@ -41,11 +41,14 @@ def main():
             buf = insertSort(buf) + insertSort(strBuf)      
     else:
         print("Error. Wrond flags")
+        sys.exit()
 
     #reverse    
     if sortflag == "-d":
         buf = reversed(buf)
     
+    print("Sorting complet")
+
     #write in file
     for index in buf:
         fw.write("{0} \n".format(index))
